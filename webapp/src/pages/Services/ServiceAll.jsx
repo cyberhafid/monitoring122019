@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Dropdown } from 'primereact/dropdown';
-import axios from 'axios';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {Dropdown} from 'primereact/dropdown';
+
 import { ServiceActiv } from '../../components/ServiceActiv';
 
 export class ServiceAll extends Component {
@@ -10,73 +10,61 @@ export class ServiceAll extends Component {
     constructor() {
         super();
         this.state = {
-            brands: null,
+            brandshh: null,
             brand: null,
-            loading: false,
-            services: [],
+            services :[],
             logsall: []
+            
         };
         this.serviceactiv = new ServiceActiv();
         this.onBrandChange = this.onBrandChange.bind(this);
-        this.getLogServices = this.getLogServices.bind(this);
-     }
+
+    }
 
     componentDidMount() {
         this.serviceactiv.getServices().then(data => this.setState({ services: data }));
-       }
-    
-       async onBrandChange(event) {
-        this.dt.filter(event.value, 'label', 'equals');
-      await this.setState({ brands: event.target.value });
-       await this.getLogServices(event.target.value);
-      // console.log('target'+JSON.stringify(event.target.value))
-       //console.log('brands'+JSON.stringify(this.state.brands))
-      }
-
-        getLogServices(league) {
-let lienurl = league;
-console.log('getrr'+JSON.stringify(lienurl))
-         setTimeout(() => {
-          this.setState({ league: league });
-            this.getLogServices(lienurl);
-            this.setState({
-               // loading: false
-            });}, 5000); 
-
-        console.log('getrr'+JSON.stringify(lienurl))
-           axios
-            .get(`http://marc.in2p3.fr:8080/api/v0/msgs/${lienurl}?n=15`)
-            .then(res => {
-                const logsall = res.data;
-                this.setState({ logsall });
-            });
-      }
-
-  
-    actionTemplate(rowData, column) {
-        return <span style={{ textAlign: 'left' }} >  {rowData.message + rowData.spacer + rowData.varmessage}</span>;
+        this.serviceactiv.getLogServices().then(data => this.setState({ logsall: data }));
     }
 
+    onBrandChange(event) {
+        this.dt.filter(event.value, '_source.process.name', 'equals');
+        this.setState({brands: event.value});
+    }
+
+   
+    handleChange(value) {this.setState({ selected: value });}
+
+    //we are creating the options 
+
+
     render() {
-        let brand = this.state.services.map((icon) => {
-            return { label: icon, value: icon };
-        });
 
-        var header = <div style={{ 'textAlign': 'left' }}  >
-            Choisir  : <Dropdown style={{ width: '50%' }}
-               value={this.state.brands} options={brand} onChange={this.onBrandChange} />
-        </div>;
 
+            //let brands = this.state.services;
+            let brands = this.state.services.map((icon) => {
+                return { label: icon.key, value: icon.key };
+              });
+
+                let brandFilter = <Dropdown style={{width: '100%'}}
+                value={this.state.logsall} options={brands} onChange={this.onBrandChange}/>
+       
+
+                console.log('aaaaaa'+JSON.stringify(this.state.logsall))
+ 
         return (
-            <div className="content-section implementation" >
-                <DataTable ref={(el) => { this.dt = el }} value={this.state.logsall}  responsive={true} paginator={true} rows={10}
-               emptyMessage="No records found" header={header} >
-                    <Column field="asctime" header="date" style={{ width: '160px' }} />
-                    <Column field="levelname" header="level" style={{ width: '75px' }} />
-                    <Column field="customname" header="service" style={{ width: '14%' }} />
-                    <Column header="message"  body={this.actionTemplate}  />
-                </DataTable>
-            </div>
+        
+
+                <div className="content-section implementation" >
+                    <DataTable ref={(el) => this.dt = el} value={this.state.logsall} paginator={true} rows={10}
+                   emptyMessage="No records found" >
+                                
+                        <Column field="_source.@timestamp" header="Year"  filter={true}  style={{width:'20%', fontWeight:'bold'}}/>
+                        <Column field="_source.process.name" header="Message"  filter={true} filterElement={brandFilter} style={{width:'20%'}} />
+                        <Column field="_source.message" header="_index"  filter={true} style={{width:'60%'}} />
+                    </DataTable>
+                </div>
+
+           
         );
     }
 }

@@ -93,20 +93,9 @@ export class LineChart extends Component {
 
         return (
             <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>LineChart</h1>
-                        <p>A line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segments.</p>
-                    </div>
-                </div>
-
+        
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Chart type="line" data={data} />
-
-                    <h3>Multi Axis</h3>
-                    <Chart type="line" data={multiAxisData} options={multiAxisOptions} />
-
+         
                     <h3>Line Styles</h3>
                     <Chart type="line" data={lineStylesData}  />
                 </div>

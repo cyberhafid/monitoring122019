@@ -2,34 +2,25 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-  export default class ServiceAxios extends Component {
+  export default class PersonList extends Component {
     state = {
       persons: []
     }
   
     componentDidMount() {
-      axios.get("http://134.158.21.55:5000/indice/service", 
-       )
+      axios.get("http://localhost:5000/indice/leveltrihouse"
+      ,   )
         .then(res => {
-          const persons = res.data;
+          const persons = res.data.aggregations.process.buckets;
           this.setState({ persons });
-          console.log('pkoiiii'+ persons );
         })
-        .catch((error) => {console.log('heeeere',error);})
-        ;   
     }
   
-
-
-
-
-
-
     render() {
        console.log('hhhh'+JSON.stringify(this.state.persons))
       return (
         <ul>
-          { this.state.persons.map(person => <li>{person._index}</li>)}
+          { this.state.persons.map(person => <li>{person.key}</li>)}
         </ul>
       )
     }

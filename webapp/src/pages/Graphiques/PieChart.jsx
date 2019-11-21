@@ -24,12 +24,7 @@ export class PieChart extends Component {
 
         return (
             <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>PieChart</h1>
-                        <p>A pie chart is a circular statistical graphic, which is divided into slices to illustrate numerical proportion.</p>
-                    </div>
-                </div>
+     
 
                 <div className="content-section implementation">
                 <Chart type="pie" data={data} />

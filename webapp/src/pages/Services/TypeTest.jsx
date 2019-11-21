@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { ServiceActiv } from '../../components/ServiceActiv';
-import axios from 'axios';
+import {Dropdown} from 'primereact/dropdown';
 
-export  class TypeTest extends Component {
+export default class TypeTest extends Component {
   constructor() {
     super();
     this.state = {
-      persons: [],
       services: []
          };
     this.serviceactiv = new ServiceActiv();
@@ -14,29 +13,9 @@ export  class TypeTest extends Component {
 
   componentDidMount() {
 
- // this.serviceactiv.getLogServices().then(data => this.setState({ services: data}));
-
- this.getser();
-
-  console.log(JSON.stringify('didmount'+this.state.persons))
+  this.serviceactiv.getServices().then(data => this.setState({ services: data }));
   //this.setState({ services });  
 }
-
-getser(){
-axios.get("http://marc.in2p3.fr:8080/api/v0/msgs/WorkloadManagement/SiteDirectorBiomed-1", 
-)
- .then(res => {
-   const persons = res.data;
-   this.setState({ persons });
-   console.log('pkoiiii'+ persons);
- })
- .catch((error) => {console.log('heeeere',error);})
- ;   
-}
-
-
-
-
 
 onBrandChange(event) {
   this.dt.filter(event.value, 'key', 'equals');
@@ -45,8 +24,9 @@ onBrandChange(event) {
 
 
   render() {
-    console.log(JSON.stringify('render'+this.state.persons))
-  
+    console.log('ddddddd'+JSON.stringify(this.state.services))
+   // console.log('hhhh'+JSON.stringify(this.serviceactiv.getServices()))
+
 
   // <Dropdown style={{width: '100%'}}
   // value={this.state.services} options={this.state.services.map((team ) => { label=team.key, value=team.doc_count })} onChange={this.onBrandChange}/>
@@ -56,11 +36,10 @@ onBrandChange(event) {
 
     return (
       <div>
- 
-            <ul>
-          { this.state.persons.map(person => <li>{person.componentname}</li>)
-          }
-        </ul>
+      <select>
+              {this.state.services.map((team) => <option label={team.key} value={team.doc_count}>{team.key}</option>)}
+            </select>
+          
             </div>
 
 

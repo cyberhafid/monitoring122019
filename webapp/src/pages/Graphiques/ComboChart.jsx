@@ -66,13 +66,7 @@ export class ComboChart extends Component {
 
         return (
             <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Combo Chart</h1>
-                        <p>Different chart types can be combined in the same graph.</p>
-                    </div>
-                </div>
-
+           
                 <div className="content-section implementation">
                     <h3>Combo Chart</h3>
                     <Chart type="bar" data={data} options={options} />

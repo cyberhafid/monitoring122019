@@ -9,7 +9,7 @@ export default class LevelPanel extends Component {
         <div className="content-section introduction">
 
           <div className="feature-intro">
-            <h1>Les Coiffeurs</h1>
+            <h1>Les blocs d'enregistrements</h1>
             <p>Mise en place d'un texte de présentation...</p>
           </div>
         </div>
@@ -17,34 +17,12 @@ export default class LevelPanel extends Component {
         <div className="content-section implementation">
           <TabView >
             <TabPanel header="Liste des services">
-     
-            </TabPanel>
-            <TabPanel header="attente de validation">
-              <div>
+            <div>
                 <Fieldset legend="En cours">
                 </Fieldset>
               </div>
             </TabPanel>
-            <TabPanel header="Coiffeurs bannis">
-              <div>
-                <Fieldset legend="En cours">
-                </Fieldset>
-              </div>
-            </TabPanel>
-            <TabPanel id="4" header="Ajouter">
-              <div>
-                <Fieldset legend="Remplir les champs suivants">
-             
-                </Fieldset>
-              </div>
-            </TabPanel>
-            <TabPanel id="4" header="Modifier">
-              <div>
-                <Fieldset legend="Remplir les champs suivants">
-           
-                </Fieldset>
-              </div>
-            </TabPanel>
+
           </TabView>
         </div>
       </div>

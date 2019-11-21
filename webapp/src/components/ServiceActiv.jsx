@@ -4,25 +4,22 @@ import axios from 'axios';
 export class ServiceActiv {
 
 
-   getServices() {
-   return  axios
-  .get('http://marc.in2p3.fr:8080/api/v0/services',  )
-  .then(res => res.data);
-   }
+async getServices() {
+   return  await axios
+  .get('http://localhost:5000/indice/servicestrihouse')
+.then(res => res.data.aggregations.process.buckets)
+.catch((error) => {console.log('heeeere',error);})
+;
+}
 
 
- getLogServices() {
-   const league= 'WorkloadManagement/SiteDirectorBiomed-1';
-  return  axios
- .get(`http://marc.in2p3.fr:8080/api/v0/msgs/${league}`  )
-.then(res => res.data);
- }
-
- getLogServiceggs() {
-  return  axios
- .get('http://marc.in2p3.fr:8080/api/v0/msgs/WorkloadManagement/SiteDirectorBiomed-1'  )
-.then(res => res.data);
- }
+async getLogServices() {
+  return  await axios
+ .get('http://localhost:5000/indice/serviceall')
+.then(res => res.data.hits.hits)
+.catch((error) => {console.log('heeeere',error);})
+;
+}
 
 
 
