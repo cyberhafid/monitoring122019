@@ -3,9 +3,9 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {Dropdown} from 'primereact/dropdown';
 
-import { ServiceActiv } from '../../components/ServiceActiv';
+import { IndiceActiv } from '../../components/IndiceActiv';
 
-export class ServiceAll extends Component {
+export class IndiceAll extends Component {
 
     constructor() {
         super();
@@ -16,7 +16,7 @@ export class ServiceAll extends Component {
             logsall: []
             
         };
-        this.serviceactiv = new ServiceActiv();
+        this.serviceactiv = new IndiceActiv();
         this.onBrandChange = this.onBrandChange.bind(this);
 
     }
@@ -54,14 +54,13 @@ export class ServiceAll extends Component {
         return (
         
 
-                <div className="content-section implementation">
+                <div className="content-section implementation" >
                     <DataTable ref={(el) => this.dt = el} value={this.state.logsall} paginator={true} rows={10}
-                   emptyMessage="No records found">
-                        <Column field="_source.message" header="_index" filter={true}  />
-                        <Column field="_source.process.name" header="Message" filter={true} filterElement={brandFilter} />
-                        <Column field="_source.@timestamp" header="Year" filter={true} />
-                      
-                
+                   emptyMessage="No records found" >
+                                
+                        <Column field="_source.@timestamp" header="Year"  filter={true}  style={{width:'20%', fontWeight:'bold'}}/>
+                        <Column field="_source.process.name" header="Message"  filter={true} filterElement={brandFilter} style={{width:'20%'}} />
+                        <Column field="_source.message" header="_index"  filter={true} style={{width:'60%'}} />
                     </DataTable>
                 </div>
 

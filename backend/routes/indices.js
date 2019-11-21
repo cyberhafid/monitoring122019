@@ -1,10 +1,8 @@
 var elasticsearch = require('elasticsearch');
-var express = require('express');  
+var express = require('express');
 var router = express.Router();
-var elastic = new elasticsearch.Client({  
- // host: 'localhost:9200',
-  //host: ['http://elastic:cppmcppm@127.0.0.1:9200/'],
-   host: ['http://127.0.0.1:9200/'],
+var elastic = new elasticsearch.Client({
+  host: ['http://127.0.0.1:9200/'],
   log: 'trace'
 });
 
@@ -12,122 +10,101 @@ var elastic = new elasticsearch.Client({
 //var elastic = require('../client');
 
 /* GET suggestions */
-router.get('/', function (req, res, next) {  
-  elastic.search(req.params.input).then(function (result) { res.json(result) });
+router.get('/', function (req, res, next) {
+  elastic.search(req.params.input).then(function (result) {
+    res.json(result)
+  });
 });
 
 
-router.get('/service', function (req, res, next) {  
+router.get('/indice', function (req, res, next) {
   elastic.search(
-   // {index: 'france-grille-dirac-logs*' } filebeat-*
-   {index: 'filebeat-*' } 
-  ).then(function (result) { res.json(result) });
+     {
+      index: 'filebeat-*'
+    }
+  ).then(function (result) {
+    res.json(result)
+  });
 });
 
 
-router.get('/levelinfo', function (req, res, next) {  
+router.get('/indicetri', function (req, res, next) {
   let body = {
-    size: 200,
-    from: 0, 
-    query: {
-      match: {
-        levelname:"INFO"
-         // name: req.query['q']
+    size: 0,
+    aggs: {
+      process: {
+        terms: {
+          field: "process.name",
+          size: 100
+        }
       }
     }
   }
-  elastic.search({index:'france-grille-dirac-logs*',  body:body})
-.then(function (result) { res.json(result) });
-  });
-
-
-  router.get('/level/:id', function (req, res, next) {  
-    let body = {
-      size: 200,
-      from: 0, 
-      query: {
-        match: {
-           levelname: req.query['id']
-                }
-              }
-    }
-    elastic.search({index:'france-grille-dirac-logs*',  body:body})
-  .then(function (result) { res.json(result) });
+  elastic.search({
+      index: 'filebeat-*',
+      body: body
+    })
+    .then(function (result) {
+      res.json(result)
     });
+});
 
 
-    router.get('/levelinfotemps', function (req, res, next) {  
-      let body = {
-        size: 2,
-        from: 0, 
-        query: {
-          match: {
-            levelname:"INFO"
-             // name: req.query['q']
-          }
-        },
-        sort: [
-          {
-            '@timestamp': {
-              order: "desc"
-            }
-          }
-        ]
-      }
-      elastic.search({index:'france-grille-dirac-logs*',  body:body})
-    .then(function (result) { res.json(result) });
-      });
+router.get('/indiceall', function (req, res, next) {
 
-      router.get('/leveltri', function (req, res, next) {  
-        let body = {
-          size: 0,
-          aggs: {
-             componentname: {
-                terms: {
-                   field: "componentname.keyword",
-                   size: 100
-                }
-             }
-          }
-        }
-        elastic.search({index:'france-grille-dirac-logs*',  body:body})
-      .then(function (result) { res.json(result) });
-        });
+  let body = {
+    size: 50,
+    query: {
+      "match_all": {}
+    },
 
-        router.get('/servicestrihouse', function (req, res, next) {  
-          let body = {
-            size: 0,
-            aggs: {
-               process: {
-                  terms: {
-                     field: "process.name",
-                     size: 100
-                  }
-               }
-            }
-          }
-          elastic.search({index:'filebeat-*',  body:body})
-        .then(function (result) { res.json(result) });
-          });
+    _source: ["@timestamp", "message", "name", "process.name"],
+  }
+
+  elastic.search(
+    // {index: 'france-grille-dirac-logs*' } filebeat-*
+    {
+      index: 'filebeat-*',
+      body: body,
+    }
+  ).then(function (result) {
+    res.json(result)
+  });
+});
 
 
-          router.get('/serviceall', function (req, res, next) {  
-           
-            let body = {
-              size: 50,
-              query: { "match_all": {} },
+router.get('/temp', function (req, res, next) {
+ 
+  var spawn = require('child_process').spawn;
 
-  _source: ["@timestamp", "message", "name", "process.name"],
-            }
-                    
-            elastic.search(
-            // {index: 'france-grille-dirac-logs*' } filebeat-*
-             {index: 'filebeat-*',body :body, } 
-            ).then(function (result) { res.json(result) });
-          });
+  temp = spawn('cat', ['/sys/class/thermal/thermal_zone0/temp']);
+
+
+temp.stdout.on('data', function(data) {
+    // data= data/1000 ;
+    
+});
+
+res.send(temp)
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 module.exports = router;
-

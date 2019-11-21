@@ -3,9 +3,9 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {Dropdown} from 'primereact/dropdown';
 
-import { ServiceActiv } from '../../components/ServiceActiv';
+import { IndiceActiv } from '../../components/IndiceActiv';
 
-export class SearchService extends Component {
+export class SearchIndice extends Component {
 
     constructor() {
         super();
@@ -13,13 +13,13 @@ export class SearchService extends Component {
             brand: null,
             addItem :''
         };
-        this.serviceactiv = new ServiceActiv();
+        this.indiceActiv = new IndiceActiv();
         this.onBrandChange = this.onBrandChange.bind(this);
 
     }
 
     componentDidMount() {
-        this.serviceactiv.getServices().then(data => this.setState({ services: data }));
+        this.indiceActiv.getServices().then(data => this.setState({ services: data }));
     }
 
     onBrandChange(event) {

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Fieldset } from 'primereact/fieldset';
-import SelectList from './Services/SelectList';
-import { SearchService } from './Services/SearchService';
-import TypeTest from './Services/TypeTest';
-import { ServiceAll } from './Services/ServiceAll';
+import SelectList from './Indices/SelectList';
+import { SearchIndice } from './Indices/SearchIndice';
+import TypeTest from './Indices/TypeTest';
+import { IndiceAll } from './Indices/IndiceAll';
 
 
-export default class ServicePanel extends Component {
+export default class IndicePanel extends Component {
   render() {
     return (
         <div>
         <div className="content-section introduction">
 
           <div className="feature-intro">
-            <h1>Les Services</h1>
+            <h1>Les Indices</h1>
             <p>Mise en place d'un texte de présentation...</p>
           </div>
         </div>
@@ -23,10 +23,10 @@ export default class ServicePanel extends Component {
           <TabView >
 
 
-          <TabPanel id="4" header="ServiceALL tous les services">
+          <TabPanel id="4" header="IndiceALL tous les indices">
               <div>
                 <Fieldset legend="Remplir les champs suivants">
-             <ServiceAll />
+             <IndiceAll />
                 </Fieldset>
               </div>
             </TabPanel>
@@ -42,7 +42,7 @@ export default class ServicePanel extends Component {
             <TabPanel header="SearchService ">
               <div>
                 <Fieldset legend="En cours">
-                <SearchService />  
+                <SearchIndice />  
                 </Fieldset>
               </div>
             </TabPanel>

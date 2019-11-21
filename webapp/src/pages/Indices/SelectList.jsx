@@ -3,7 +3,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Fieldset } from 'primereact/fieldset';
-import { ServiceActiv } from '../../components/ServiceActiv';
+import { IndiceActiv } from '../../components/IndiceActiv';
 import {
   Link
 } from 'react-router-dom';
@@ -14,11 +14,11 @@ export default class SelectList extends Component {
     super();
     this.state = {
          };
-    this.serviceactiv = new ServiceActiv();
+    this.indiceactiv = new IndiceActiv();
   }
 
   componentDidMount() {
-  this.serviceactiv.getServices().then(data => this.setState({ services: data }));
+  this.indiceactiv.getServices().then(data => this.setState({ services: data }));
   }
 
   actionTemplate(rowData, column) {

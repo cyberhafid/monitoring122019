@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ServiceActiv } from '../../components/ServiceActiv';
+import { IndiceActiv } from '../../components/IndiceActiv';
 import {Dropdown} from 'primereact/dropdown';
 
 export default class TypeTest extends Component {
@@ -8,7 +8,7 @@ export default class TypeTest extends Component {
     this.state = {
       services: []
          };
-    this.serviceactiv = new ServiceActiv();
+    this.serviceactiv = new IndiceActiv();
   }
 
   componentDidMount() {
