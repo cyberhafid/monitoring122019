@@ -7,6 +7,7 @@ import IndicePanel from '../pages/IndicePanel';
 
 import DocApi from '../pages/DocApi';
 import GraphPanel from '../pages/GraphPanel';
+import SystemPanel from '../pages/SystemPanel';
 export default class AdminRouter extends Component {
   render() {
     return (
@@ -17,6 +18,7 @@ export default class AdminRouter extends Component {
         <Route  exact path='/admin/users' component={UserPanel} />
         <Route  exact path='/admin/chart' component={GraphPanel} />
         <Route   path='/admin/api' component={DocApi} />
+        <Route   path='/admin/system' component={SystemPanel} />
     </Switch>
     )
   }

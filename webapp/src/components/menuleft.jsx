@@ -13,6 +13,7 @@ export default class MenuLeft extends Component {
           {label: 'Indice', icon: 'pi pi-fw pi-file',url: '/admin/indices' },
           {label: 'Level', icon: 'pi pi-fw pi-calendar',url: '/admin/levels'},
           {label: 'User', icon: 'pi pi-fw pi-user', url: '/admin/users'},
+          {label: 'System', icon: 'pi pi-fw pi-file',url: '/admin/system' },
           {label: 'Graphiques', icon: 'pi pi-fw pi-calendar', url: '/admin/chart'}
             ]
         },

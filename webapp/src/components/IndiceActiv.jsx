@@ -20,12 +20,6 @@ async getLogServices() {
 .catch((error) => {console.log('heeeere',error);})
 ;
 }
-
-
-
-
-
-
 }
 
 
