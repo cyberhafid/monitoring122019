@@ -5,6 +5,7 @@ import SelectList from './Indices/SelectList';
 import { SearchIndice } from './Indices/SearchIndice';
 import TypeTest from './Indices/TypeTest';
 import { IndiceAll } from './Indices/IndiceAll';
+import SourceJson from './Indices/SourceJson';
 
 
 export default class IndicePanel extends Component {
@@ -21,6 +22,19 @@ export default class IndicePanel extends Component {
 
         <div className="content-section implementation">
           <TabView >
+          <TabPanel id="4" header="Source JSON">
+              <div>
+                <Fieldset legend="Remplir les champs suivants">
+             <SourceJson/>
+                </Fieldset>
+              </div>
+            </TabPanel>
+
+
+
+
+
+
 
 
           <TabPanel id="4" header="IndiceALL tous les indices">

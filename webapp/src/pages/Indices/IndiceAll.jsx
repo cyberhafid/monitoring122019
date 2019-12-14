@@ -49,7 +49,7 @@ export class IndiceAll extends Component {
                 value={this.state.logsall} options={brands} onChange={this.onBrandChange}/>
        
 
-                console.log('aaaaaa'+JSON.stringify(this.state.logsall))
+           
  
         return (
         
@@ -58,9 +58,9 @@ export class IndiceAll extends Component {
                     <DataTable ref={(el) => this.dt = el} value={this.state.logsall} paginator={true} rows={10}
                    emptyMessage="No records found" >
                                 
-                        <Column field="_source.@timestamp" header="Year"  filter={true}  style={{width:'20%', fontWeight:'bold'}}/>
-                        <Column field="_source.process.name" header="Message"  filter={true} filterElement={brandFilter} style={{width:'20%'}} />
-                        <Column field="_source.message" header="_index"  filter={true} style={{width:'60%'}} />
+                        <Column field="_source.@timestamp" header="Date"  filter={true}  style={{width:'20%', fontWeight:'bold'}}/>
+                        <Column field="_source.process.name" header="Service"  filter={true} filterElement={brandFilter} style={{width:'20%'}} />
+                        <Column field="_source.message" header="Message"  filter={true} style={{width:'60%'}} />
                     </DataTable>
                 </div>
 
