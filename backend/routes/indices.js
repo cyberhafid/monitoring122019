@@ -13,7 +13,9 @@ var elastic = new elasticsearch.Client({
 router.get('/', function (req, res, next) {
   elastic.search(req.params.input).then(function (result) {
     res.json(result)
-  });
+  })
+  .catch(err => res.json({ err }).status(500));
+  
 });
 
 
@@ -24,7 +26,8 @@ router.get('/indice', function (req, res, next) {
     }
   ).then(function (result) {
     res.json(result)
-  });
+  })
+  .catch(err => res.json({ err }).status(500));
 });
 
 
@@ -46,7 +49,8 @@ router.get('/indicetri', function (req, res, next) {
     })
     .then(function (result) {
       res.json(result)
-    });
+    })
+    .catch(err => res.json({ err }).status(500));
 });
 
 
@@ -69,38 +73,33 @@ router.get('/indiceall', function (req, res, next) {
     }
   ).then(function (result) {
     res.json(result)
-  });
+  })
+  .catch(err => res.json({ err }).status(500));
 });
 
 
 router.get('/temp', function (req, res, next) {
- 
   var spawn = require('child_process').spawn;
 
   temp = spawn('cat', ['/sys/class/thermal/thermal_zone0/temp']);
-
-
+  
 temp.stdout.on('data', function(data) {
-    // data= data/1000 ;
-    
+          console.log('Result: ' + data/1000 + ' degrees Celcius');
+  });
+res.json(temp)
 });
 
+
+
+
+router.get('/tddemp', function (req, res, next) {
+  var spawn = require('child_process').spawn;
+ temp = spawn('cat', ['/sys/class/thermal/thermal_zone0/temp']);
+temp.stdout.on('data', function(data) {
+   // data= data/1000 ; 
+});
 res.send(temp)
-
-
-
 });
-
-
-
-
-
-
-
-
-
-
-
 
 
 
