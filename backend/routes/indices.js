@@ -6,9 +6,7 @@ var elastic = new elasticsearch.Client({
   log: 'trace'
 });
 
-
 //var elastic = require('../client');
-
 /* GET suggestions */
 router.get('/', function (req, res, next) {
   elastic.search(req.params.input).then(function (result) {
@@ -79,6 +77,7 @@ router.get('/indiceall', function (req, res, next) {
 
 
 router.get('/temp', function (req, res, next) {
+<<<<<<< HEAD
   var spawn = require('child_process').spawn;
 
   temp = spawn('cat', ['/sys/class/thermal/thermal_zone0/temp']);
@@ -91,6 +90,13 @@ res.json(temp)
 
 
 
+=======
+   var spawn = require('child_process').spawn;
+  temp = spawn('cat', ['/sys/class/thermal/thermal_zone0/temp']);
+    temp.stdout.on('data', function(data) {
+          console.log('Result: ' + data/1000 + ' degrees Celcius');
+  });
+>>>>>>> 8db87645531af3dd7a1c846c5aa0f7c78138a64c
 
 router.get('/tddemp', function (req, res, next) {
   var spawn = require('child_process').spawn;
@@ -103,7 +109,10 @@ res.send(temp)
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 8db87645531af3dd7a1c846c5aa0f7c78138a64c
 module.exports = router;
