@@ -11,6 +11,7 @@
     "debug": "~2.6.9",
     "elasticsearch": "^16.3.0",
     "express": "^4.17.1",
+    "imgbb-uploader": "^0.1.2",
     "morgan": "~1.9.1"
   }
 }
