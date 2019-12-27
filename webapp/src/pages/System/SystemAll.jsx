@@ -59,7 +59,9 @@ export class SystemAll extends Component {
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>CPU</h1>
-                    <p>{this.state.services.cores}</p>
+                    <p>{
+                    //this.state.services.cores
+                    }</p>
                 </div>
             </div>
             </div>
