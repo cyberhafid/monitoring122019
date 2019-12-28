@@ -6,7 +6,7 @@ export class IndiceActiv {
 
 async getServices() {
    return  await axios
-  .get('http://localhost:5000/indice/indicetri')
+  .get('http://localhost:5001/indice/indicetri')
 .then(res => res.data.aggregations.process.buckets)
 .catch(err => console.error(err))
 ;
@@ -15,7 +15,7 @@ async getServices() {
 
 async getLogServices() {
   return  await axios
- .get('http://localhost:5000/indice/indiceall')
+ .get('http://localhost:5001/indice/indiceall')
 .then(res => res.data.hits.hits)
 .catch(err => console.error(err))
 ;

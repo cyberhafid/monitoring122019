@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
-import LevelPanel from '../pages/LevelPanel';
-import UserPanel from '../pages/UserPanel';
 import IndicePanel from '../pages/IndicePanel';
 
 import DocApi from '../pages/DocApi';
@@ -14,8 +12,6 @@ export default class AdminRouter extends Component {
       <Switch>
       <Route exact path='/admin' component={Dashboard} />
         <Route  path='/admin/indices' component={IndicePanel} />
-        <Route  path='/admin/levels' component={LevelPanel} />
-        <Route  exact path='/admin/users' component={UserPanel} />
         <Route  exact path='/admin/chart' component={GraphPanel} />
         <Route   path='/admin/api' component={DocApi} />
         <Route   path='/admin/system' component={SystemPanel} />
